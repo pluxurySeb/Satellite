@@ -1,0 +1,243 @@
+﻿<Application
+    x:Class="Satellite.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Satellite"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style x:Key="CircleButtonStyle" TargetType="Button">
+                <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="UseSystemFocusVisuals" Value="True"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid x:Name="RootGrid">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <ContentPresenter x:Name="ContentPresenter" 
+                                              VerticalAlignment="Center" 
+                                              AutomationProperties.AccessibilityView="Raw" 
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                              ContentTransitions="{TemplateBinding ContentTransitions}" 
+                                              Content="{TemplateBinding Content}" 
+                                              Width="{TemplateBinding Width}"
+                                              Height="{TemplateBinding Height}"
+                                              Padding="{TemplateBinding Padding}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="PostsGridViewStyle" TargetType="GridViewItem">
+                <Setter Property="Margin" Value="20 25"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <controls:DropShadowPanel 
+                                                      x:Name="Shadow" 
+                                                      BlurRadius="30" 
+                                                      Color="{ThemeResource SystemColorActiveCaptionColor}" 
+                                                      HorizontalAlignment="Center" 
+                                                      OffsetY="10" 
+                                                      OffsetX="0" 
+                                                      ShadowOpacity="1" 
+                                                      VerticalAlignment="Center">
+                                <controls:DropShadowPanel.RenderTransform>
+                                    <CompositeTransform/>
+                                </controls:DropShadowPanel.RenderTransform>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup  x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(DropShadowPanel.ShadowOpacity)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(DropShadowPanel.BlurRadius)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(DropShadowPanel.ShadowOpacity)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0.1">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1"/>
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1.01">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1"/>
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1.01">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(DropShadowPanel.BlurRadius)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="30">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(DropShadowPanel.OffsetY)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="10">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(DropShadowPanel.ShadowOpacity)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0.2">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1.01">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1.01">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(DropShadowPanel.BlurRadius)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="30">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(DropShadowPanel.OffsetY)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="10">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="PointerOverPressed">
+                                            <Storyboard>
+                                                <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(DropShadowPanel.ShadowOpacity)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0.2">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1.01">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1.01">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(DropShadowPanel.BlurRadius)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="30">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True" Storyboard.TargetName="Shadow" Storyboard.TargetProperty="(DropShadowPanel.OffsetY)">
+                                                    <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="10">
+                                                        <SplineDoubleKeyFrame.KeySpline>
+                                                            <KeySpline ControlPoint2="0,1" ControlPoint1="0.44,0"/>
+                                                        </SplineDoubleKeyFrame.KeySpline>
+                                                    </SplineDoubleKeyFrame>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <ContentPresenter x:Name="ContentPresenter"/>
+                            </controls:DropShadowPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
