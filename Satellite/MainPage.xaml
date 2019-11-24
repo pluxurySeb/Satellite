@@ -80,7 +80,7 @@
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
-            <Grid x:Name="AddDBListGrid">
+            <Grid x:Name="AddDBListGrid" Visibility="Collapsed">
                 <Grid.Background>
                     <media:BackdropBlurBrush Amount="20" />
                 </Grid.Background>
@@ -88,7 +88,7 @@
                     <FontIcon Glyph="&#xECE9;" 
                           Foreground="Transparent"/>
                 </Grid>
-                <Grid Width="300" Height="300" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Visibility="Visible">
+                <Grid Width="300" Height="300" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <StackPanel>
                         <TextBlock Text="Добавить расписание" HorizontalAlignment="Center" FontSize="25" Margin="20"/>
                         <Grid>
