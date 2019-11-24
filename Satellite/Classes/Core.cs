@@ -12,14 +12,14 @@ namespace Satellite.Classes
     {
         public DbSet<Post> Post { get; set; }
         public DbSet<Publisher> Publisher { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=46.146.233.70;database=ezhupa;user=debohih;password=analny");
+            optionsBuilder.UseMySQL("server=46.146.233.70; database=ezhupa; user=debohih; password=analny");
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public void OnModelCreating(ModelBuilder modelBuilder)
         {
-            OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Publisher>(entity =>
             {
                 entity.HasKey(e => e.ID);

@@ -121,7 +121,7 @@ namespace Satellite
             }
         }
 
-        public void NewDBListButton_Click(object sender, RoutedEventArgs e)
+        private void NewDBListButton_Click(object sender, RoutedEventArgs e)
         {
             using (var context = new Core())
             {
@@ -131,13 +131,14 @@ namespace Satellite
                 // Adds a publisher
                 var publisher = new Publisher
                 {
-                    Name = "Mariner Books"
+                    Name = "Твоя папаша"
                 };
                 context.Publisher.Add(publisher);
 
                 // Adds some books
                 context.Post.Add(new Post
                 {
+                    ID = "16102018",
                     Header = "Какое-то охуевшее расписание",
                     SPoint = "Урок сРачевой",
                     Publisher = publisher
