@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Satellite.Classes
 {
-    public class Core
+    public class Core : DbContext
     {
-        public DbSet<Post> Book { get; set; }
+        public DbSet<Post> Post { get; set; }
         public DbSet<Publisher> Publisher { get; set; }
-        protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=46.146.233.70;database=ezhupa;user=debohih;password=analny");
         }
 
-        protected void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             OnModelCreating(modelBuilder);
             modelBuilder.Entity<Publisher>(entity =>
