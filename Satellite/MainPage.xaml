@@ -79,10 +79,10 @@
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
-            <Grid Width="300" Height="300" Background="Black" Visibility="Collapsed">
+            <Grid Width="300" Height="300" Background="Black" Visibility="Visible">
                 <StackPanel>
-                    <TextBlock Text="Заполните расписание" HorizontalAlignment="Center" FontSize="25" Margin="20"/>
-                    <TextBox PlaceholderText="Пункт"/>
+                    <TextBlock Text="Добавить расписание" HorizontalAlignment="Center" FontSize="25" Margin="20"/>
+                    <TextBox PlaceholderText="Пункт" BorderThickness="0"/>
                 </StackPanel>
             </Grid>
         </Grid>
