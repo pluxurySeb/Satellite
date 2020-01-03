@@ -215,15 +215,6 @@
       <Version>8.0.18</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Satellite_TemporaryKey.pfx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 8.0.18\Assemblies\v4.5.2\BouncyCastle.Crypto.dll</HintPath>
-    </Reference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

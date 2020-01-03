@@ -14,5 +14,9 @@ namespace Satellite.Classes
             whatToDO = what;
         }
     }
+    public class AddListItem
+    {
+        public string Point { get; set; }
+    }
 }
     
