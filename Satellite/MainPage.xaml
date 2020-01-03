@@ -9,114 +9,60 @@
     xmlns:classes="using:Satellite.Classes"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlPageBackgroundChromeMediumLowBrush}">
-
+    <!--Иван лох-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="HomeGrid">
+        <Pivot Margin="50">
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="Вчера" FontSize="28" FontWeight="SemiLight"/>
+                </PivotItem.Header>
+                <TextBlock Text="Здесь пока ничего нет" FontSize="40" Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="Сегодня" FontSize="28" FontWeight="SemiLight"/>
+                </PivotItem.Header>
+                <StackPanel Orientation="Vertical">
+                    <ListView x:Name="Todos" ItemContainerStyle="{StaticResource LinesListViewStyle}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock FontSize="25" Text="{Binding whatToDO}" FontWeight="Bold"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBox Margin="0 25 0 0" Style="{StaticResource TextBoxStyleBlack}" x:Name="NewTodoTxtBox" FontSize="20" PlaceholderText="Новый пункт"/>
+                    <Button x:Name="InsertTodoBtn" Click="InsertTodoBtn_Click" Content="Добавить к списку" Margin="0,20,0,0"/>
+                </StackPanel>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="Завтра" FontSize="28" FontWeight="SemiLight"/>
+                </PivotItem.Header>
+                <TextBlock Text="Здесь пока ничего нет" FontSize="40" Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </PivotItem>
+        </Pivot>
+        <Grid x:Name="HomeGrid" Grid.Column="1">
             <ScrollViewer VerticalAlignment="Center">
                 <StackPanel>
-                    <GridView x:Name="MainGridView" ItemsSource="{Binding Posts}" ItemContainerStyle="{StaticResource PostsGridViewStyle}">
-                        <GridView.ItemTemplate>
-                            <DataTemplate x:DataType="classes:Post">
-                                <Grid Background="{ThemeResource SystemChromeLowColor}" CornerRadius="5" Padding="20">
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Header}" 
-                                               HorizontalAlignment="Center" 
-                                               FontSize="25" FontWeight="Bold"/>
-                                        <ListView SelectionMode="None">
-                                            <ListView.ItemTemplate>
-                                                <DataTemplate x:DataType="classes:Post">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <TextBlock VerticalAlignment="Center" Text="#" Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}"
-                                                               Margin="0 0 10 0"/>
-                                                        <Grid MinWidth="350">
-                                                            <TextBlock Text="Пункт" FontSize="18"
-                                                                   FontWeight="SemiBold"/>
-                                                            <TextBlock Text="15:20" Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}" FontSize="12" VerticalAlignment="Center"
-                                                                   FontWeight="SemiLight" 
-                                                                   HorizontalAlignment="Right"/>
-                                                        </Grid>
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </ListView.ItemTemplate>
-                                            <ListView.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <ItemsStackPanel/>
-                                                </ItemsPanelTemplate>
-                                            </ListView.ItemsPanel>
-                                            <DataTemplate/>
-                                            <DataTemplate/>
-                                            <DataTemplate/>
-                                            <DataTemplate/>
-                                            <DataTemplate/>
-                                        </ListView>
-                                    </StackPanel>
-                                    <controls:DropShadowPanel VerticalAlignment="Top" BlurRadius="30" ShadowOpacity="0.5" Color="{ThemeResource SystemAccentColor}">
-                                        <Rectangle Width="5" Height="115" RadiusX="2.5" RadiusY="2.5">
-                                            <Rectangle.Fill>
-                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                    <GradientStop Color="{ThemeResource SystemAccentColorDark3}"/>
-                                                    <GradientStop Color="{ThemeResource SystemAccentColorLight3}" Offset="1"/>
-                                                </LinearGradientBrush>
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-                                    </controls:DropShadowPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
-                        <GridView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <ItemsStackPanel/>
-                            </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
-                    </GridView>
+                    <TextBlock Text="Не рекомендую это нажимать" FontSize="20" Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="&#xE710;" Style="{StaticResource CircleButtonStyle}" Click="AddSheduleButton_Click" FontSize="25" FontFamily="Segoe MDL2 Assets" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="80" Width="80"/>
-                        <Button Content="&#xE711;" Foreground="OrangeRed" Style="{StaticResource CircleButtonStyle}" Click="ClearSheduleButton_Click" FontSize="25" FontFamily="Segoe MDL2 Assets" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="80" Width="80"/>
+                        <Button Content="&#xE710;" Style="{StaticResource CircleButtonStyle}" Click="AddScheduleButton_Click" FontSize="25" FontFamily="Segoe MDL2 Assets" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="80" Width="80"/>
+                        <Button Content="&#xE711;" Foreground="OrangeRed" Style="{StaticResource CircleButtonStyle}" Click="ClearScheduleButton_Click" FontSize="25" FontFamily="Segoe MDL2 Assets" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="80" Width="80"/>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
-            <Grid Width="300" Height="300" Background="Black" Visibility="Visible">
+            <Grid Width="300" Height="300" Background="{ThemeResource AppBarBackgroundThemeBrush}" Visibility="Collapsed">
                 <StackPanel>
                     <TextBlock Text="Добавить расписание" HorizontalAlignment="Center" FontSize="25" Margin="20"/>
                     <TextBox PlaceholderText="Пункт" BorderThickness="0"/>
                 </StackPanel>
             </Grid>
         </Grid>
-        <Grid x:Name="ListsGrid" Visibility="Collapsed">
-            <Grid>
-            <StackPanel x:Name="ChListStack" VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Click="SchoolShButton_Click" Margin="0  0 20 0" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <Button.Content>
-                        <Grid Height="200" Width="120">
-                            <StackPanel VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xE7BE;" FontSize="48" Margin="0 35"/>
-                                <TextBlock Text="Школьное расписание" TextWrapping="Wrap" FontWeight="Medium" FontSize="18"/>
-                            </StackPanel>
-                        </Grid>
-                    </Button.Content>
-                </Button>
-                <Button Click="DailyShButton_Click" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <Button.Content>
-                        <Grid Height="200" Width="120">
-                            <StackPanel VerticalAlignment="Center">
-                                <FontIcon Glyph="&#xE7BC;" FontSize="48" Margin="0 35"/>
-                                <TextBlock Text="Распорядок дня" TextWrapping="Wrap" FontWeight="Medium" FontSize="18"/>
-                            </StackPanel>
-                        </Grid>
-                    </Button.Content>
-                </Button>
-            </StackPanel>
-            </Grid>
-        </Grid>
-        <Rectangle Grid.Column="1" Fill="{ThemeResource AppBarSeparatorForegroundThemeBrush}" Width="1" HorizontalAlignment="Left"/>
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Style="{StaticResource CircleButtonStyle}" Content="&#xEA8A;" Margin="0 50" Click="HomeButton_Click"/>
-            <Button Style="{StaticResource CircleButtonStyle}" Content="&#xEA55;" Margin="0 50" Click="ListsButton_Click"/>
-            <Button Style="{StaticResource CircleButtonStyle}" Content="&#xEC26;" Margin="0 50" Click="OrbitButton_Click"/>
-        </StackPanel>
     </Grid>
 </Page>

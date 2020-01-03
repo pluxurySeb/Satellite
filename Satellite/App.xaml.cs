@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Satellite.Classes;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace Satellite
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
+        public static TodoViewModel TODO_VIEW_MODEL = new TodoViewModel();
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points

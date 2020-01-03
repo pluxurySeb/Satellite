@@ -8,14 +8,14 @@
 
   <Identity
     Name="57e596cc-8caf-4de0-8162-fdd38eabc591"
-    Publisher="CN=andre"
-    Version="1.0.0.0" />
+    Publisher="CN=Киберпанки"
+    Version="0.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="57e596cc-8caf-4de0-8162-fdd38eabc591" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Satellite</DisplayName>
-    <PublisherDisplayName>andre</PublisherDisplayName>
+    <PublisherDisplayName>Киберпанки</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

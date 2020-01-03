@@ -1,37 +1,83 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore.Extensions;
-using System;
+﻿using MySql.Data.MySqlClient;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.Collections.ObjectModel;
+using Windows.UI.Xaml.Controls;
+//У меня Август в кадетском корпусе с дополетной подготовкой, советую беречь жопы
 namespace Satellite.Classes
 {
-    public class Core
+    public class TodoViewModel
     {
-        public DbSet<Post> Book { get; set; }
-        public DbSet<Publisher> Publisher { get; set; }
-        protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        private static TodoViewModel _todoViewModel = new TodoViewModel();
+        private ObservableCollection<Todo> _allToDos = new ObservableCollection<Todo>();
+
+        public ObservableCollection<Todo> AllTodos
         {
-            optionsBuilder.UseMySQL("server=46.146.233.70;database=ezhupa;user=debohih;password=analny");
+            get
+            {
+                return _todoViewModel._allToDos;
+            }
         }
 
-        protected void OnModelCreating(ModelBuilder modelBuilder)
+        public IEnumerable<Todo> GetTodos()
         {
-            OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Publisher>(entity =>
+            try
             {
-                entity.HasKey(e => e.ID);
-                entity.Property(e => e.Name).IsRequired();
-            });
-            modelBuilder.Entity<Post>(entity =>
+
+                using (MySqlConnection connection = new MySqlConnection("Server=kramskov.tk;Database=ezhupa;User Id=debohih;Password=analny;SslMode=None"))
+                {
+                    connection.Open();
+                    MySqlCommand getCommand = connection.CreateCommand();
+                    getCommand.CommandText = "SELECT whatToDO FROM todo";
+                    using (MySqlDataReader reader = getCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            _todoViewModel._allToDos.Add(new Todo(reader.GetString("whatToDO")));
+                        }
+                    }
+                }
+            }
+            catch (MySqlException)
             {
-                entity.HasKey(e => e.ID);
-                entity.Property(e => e.Header).IsRequired();
-                entity.HasOne(d => d.Publisher)
-                  .WithMany(p => p.Posts);
-            });
+                ContentDialog deleteFileDialog = new ContentDialog()
+                {
+                    Title = "Работает, да вот чет данные подключения херовые :)",
+                    PrimaryButtonText = "ОК"
+                };
+                deleteFileDialog.ShowAsync();
+            }
+            return _todoViewModel.AllTodos;
+        }
+
+        public bool InsertNewTodo(string what)
+        {
+            Todo newTodo = new Todo(what);
+            // Insert to the collection and update DB    
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection("Server=kramskov.tk;Database=ezhupa;User Id=analny;Password=debohih;SslMode=None"))
+                {
+                    connection.Open();
+                    MySqlCommand insertCommand = connection.CreateCommand();
+                    insertCommand.CommandText = "INSERT INTO todo(whatToDO)VALUES(@whatToDO)";
+                    insertCommand.Parameters.AddWithValue("@whatToDO", newTodo.whatToDO);
+                    insertCommand.ExecuteNonQuery();
+                    _todoViewModel._allToDos.Add(newTodo);
+                    return true;
+
+                }
+            }
+            catch (MySqlException)
+            {
+                // Don't forget to handle it    
+                return false;
+            }
+
+        }
+
+
+        public TodoViewModel()
+        { //фу гавноооооо
         }
     }
 }
